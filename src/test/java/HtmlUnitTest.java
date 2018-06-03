@@ -48,5 +48,5 @@ public class HtmlUnitTest
                 () -> assertTrue(books.getTableContent().get(1).getText().contains("1900"))
         );
     }
-    
+
 }

@@ -49,3 +49,16 @@ Then Otrzymam 2 wyniki
 Given Zalogowany jako uzytkownik
 When Wpisuje nieistniejaca fraze do wyszukiwarki
 Then Otrzymam pusta tabele
+
+Scenario: Dodawanie nieprawidłowych ksiazek
+
+Given Dane do ksiazki:
+|title|pages|date|price|author|
+|Jas|200|10101995|a|1|
+|Jas|200|10102222|15|1|
+Then bledem jest:
+|message|
+|The field Price must be a number.|
+|Release Date cannot be in future|
+
+
