@@ -19,3 +19,7 @@ Then Zobacze informacje o blednym imieniu
 Given Zalogowany jako admin
 When Dodaje autora z nazwiskiem z malych liter
 Then Zobacze informacje o blednym nazwisku
+
+Given Zalogowany jako admin
+When Dodaje autora z imieniem i nazwiskiem z malych liter
+Then Zobacze informacje o problemach z walidacja
