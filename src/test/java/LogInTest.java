@@ -60,4 +60,5 @@ public class LogInTest {
     public void tearDown() throws Exception {
         driver.quit();
     }
+
 }

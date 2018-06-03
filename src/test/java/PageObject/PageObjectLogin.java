@@ -27,5 +27,10 @@ public class PageObjectLogin {
         password.sendKeys(pass);
         loginButton.submit();
     }
-    
+
+    public boolean assertTitle() throws Exception{
+        Boolean result = driver.getTitle().contains("Dashboard");
+        System.out.println(driver.getTitle());
+        return(result);
+    }
 }
