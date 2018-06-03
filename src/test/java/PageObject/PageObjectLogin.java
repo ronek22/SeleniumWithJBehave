@@ -20,6 +20,16 @@ public class PageObjectLogin {
     @FindBy(id = "UserName")
     private WebElement userNameLabel;
 
+    @FindBy(id = "AuthorsLink")
+    private WebElement authorsLink;
+
+    @FindBy(id = "BooksLink")
+    private WebElement booksLink;
+
+    @FindBy(id = "logoutForm")
+    private WebElement logoutForm;
+
+
 
     public PageObjectLogin(WebDriver driver){
         this.driver = driver;
@@ -30,6 +40,18 @@ public class PageObjectLogin {
         email.sendKeys(login); loginEmail = login;
         password.sendKeys(pass);
         loginButton.submit();
+    }
+
+    public void authorPage(){
+        authorsLink.click();
+    }
+
+    public void bookPage(){
+        booksLink.click();
+    }
+
+    public void signOut(){
+        logoutForm.submit();
     }
 
     public boolean assertMessage() throws Exception{

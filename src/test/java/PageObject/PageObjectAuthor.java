@@ -56,6 +56,22 @@ public class PageObjectAuthor {
         searchBar.submit();
     }
 
+    public String getAuthor(int id){
+        WebElement tr = driver.findElement(By.xpath("(//table[@class='table']/tbody/tr)[" + id + "]"));
+        return tr.getText();
+    }
+
+    public void editAuthor(int id, String firstname, String lastname){
+        driver.get("http://bookcatalog.azurewebsites.net/Authors/Edit/" + id);
+        firstName.clear();
+        firstName.sendKeys(firstname);
+
+        lastName.clear();
+        lastName.sendKeys(lastname);
+
+        lastName.submit();
+    }
+
     public int sizeOfTable(){
         return tableContent.size();
     }
@@ -66,6 +82,11 @@ public class PageObjectAuthor {
 
     public String assertAddedRecord() {
         WebElement tr = driver.findElement(By.xpath("(//table[@class='table']/tbody/tr)[last()]"));
+        return tr.getText();
+    }
+
+    public String assertRecord(int id) {
+        WebElement tr = driver.findElement(By.xpath("(//table[@class='table']/tbody/tr)[" + id + "]"));
         return tr.getText();
     }
 

@@ -126,6 +126,7 @@ public class AuthorSteps extends Steps {
     @Then("Otrzymam pusta tabele")
     public void EmptyTableAsSearchResult(){
         assertEquals(0, sizeAfter);
+        driver.quit();
     }
 
 

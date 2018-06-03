@@ -17,9 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class BehaveRunner extends JUnitStories {
-
-
+public class BehaveRunnerTest extends JUnitStories {
     @Override
     public Configuration configuration(){
         return new MostUsefulConfiguration().useStoryReporterBuilder(getReporter()).
@@ -29,7 +27,7 @@ public class BehaveRunner extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new AuthorSteps());
+        return new InstanceStepsFactory(configuration(), new LoginSteps(), new AuthorSteps());
     }
 
     @Override

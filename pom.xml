@@ -13,6 +13,9 @@
 		<junit.jupiter.version>5.2.0</junit.jupiter.version>
 		<junit.vintage.version>5.2.0</junit.vintage.version>
 		<junit.platform.version>1.2.0</junit.platform.version>
+		<jbehave.core.version>4.3</jbehave.core.version>
+		<jbehave.site.version>3.3</jbehave.site.version>
+		<embeddables>**/*Stories.java</embeddables>
 	</properties>
 
 	<dependencies>
