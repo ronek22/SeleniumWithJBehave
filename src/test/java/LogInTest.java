@@ -1,6 +1,4 @@
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,8 +16,8 @@ public class LogInTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    @BeforeAll
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -28,13 +26,10 @@ public class LogInTest {
         driver.get("http://bookcatalog.azurewebsites.net/Account/Login");
     }
 
-    @AfterAll
-    public static void tearDown() throws Exception {
-        driver.quit();
-    }
+
 
     @Test
-    public void logInTest(){
+    public void logInTestPassed(){
         WebElement element = driver.findElement(By.id("Email"));
         element.sendKeys("admin@admin.com");
 
@@ -47,7 +42,22 @@ public class LogInTest {
 
         WebElement userName = driver.findElement(By.id("UserName"));
         assertEquals("Hello admin@admin.com!", userName.getText());
-
     }
 
+    @Test
+    public void logInTestFailed(){
+        WebElement element = driver.findElement(By.id("Email"));
+        element.sendKeys("fdsf@admin.com");
+
+        element = driver.findElement(By.id("Password"));
+        element.sendKeys("admin22");
+
+        element.submit();
+        assertEquals("http://bookcatalog.azurewebsites.net/Account/Login", driver.getCurrentUrl());
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        driver.quit();
+    }
 }
