@@ -15,7 +15,7 @@ public class PageObjectLoginTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        System.setProperty("webdriver.gecko.driver", "resources/geckodriver");
+        System.setProperty("webdriver.gecko.driver", "resources/geckodriver.exe");
         driver = new FirefoxDriver();
     }
 
