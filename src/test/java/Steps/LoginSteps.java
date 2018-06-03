@@ -1,6 +1,9 @@
+package Steps;
+
 import PageObject.PageObjectAuthorCreate;
 import PageObject.PageObjectLogin;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import PageObject.PageObjectNavigation;
 import org.jbehave.core.annotations.Given;
@@ -34,6 +37,18 @@ public class LoginSteps extends Steps {
     @Then("Zobaczę <message> na stronie głównej")
     public void checkLogin(@Named("message") String message){
         assertTrue(driver.findElement(By.id("UserName")).getText().equals(message));
+        driver.quit();
+    }
+
+    @When("Logowanie na nieistniejace konto")
+    public void SignInWithIncorrectData() throws Exception{
+        PageObjectLogin loginPage = PageFactory.initElements(driver, PageObjectLogin.class);
+        loginPage.login("notuser@mail.com", "sasa");
+    }
+
+    @Then("Zostane na stronie logowania")
+    public void StayOnLoginSiteAfterFailedLogin(){
+        assertEquals("http://bookcatalog.azurewebsites.net/Account/Login", driver.getCurrentUrl());
         driver.quit();
     }
 

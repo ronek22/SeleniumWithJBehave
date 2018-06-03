@@ -1,5 +1,6 @@
 package PageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,9 @@ public class PageObjectAuthorCreate {
     @FindBy(className = "text-danger")
     private WebElement validationError;
 
+    @FindBy(id = "AuthorId")
+    private WebElement authorDeleteForm;
+
 
     public PageObjectAuthorCreate(WebDriver driver){
         this.driver = driver;
@@ -32,5 +36,16 @@ public class PageObjectAuthorCreate {
 
     public Boolean assertValidationError(String message){
         return validationError.getText().contains(message);
+    }
+
+    public String assertAddedRecord() {
+        WebElement tr = driver.findElement(By.xpath("(//table[@class='table']/tbody/tr)[last()]"));
+        return tr.getText();
+    }
+
+    public void deleteLastItem(){
+        WebElement tr = driver.findElement(By.xpath("(//table[@class='table']/tbody/tr[last()]/td[last()]/a[last()])"));
+        driver.navigate().to(tr.getAttribute("href"));
+        authorDeleteForm.submit();
     }
 }

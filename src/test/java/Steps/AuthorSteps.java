@@ -1,3 +1,5 @@
+package Steps;
+
 import PageObject.PageObjectAuthorCreate;
 import PageObject.PageObjectLogin;
 import org.jbehave.core.annotations.Given;
@@ -58,6 +60,21 @@ public class AuthorSteps extends Steps {
     @Then("Zobacze informacje o problemach z walidacja")
     public void getInfoAboutValidationsAuthorProblems(){
         assertEquals(2, driver.findElements(By.className("text-danger")).size());
+        driver.quit();
+    }
+
+    @When("Dodaje autora z prawidlowymi danymi")
+    public void addAuthorWithCorrectData(){
+        driver.get("http://bookcatalog.azurewebsites.net/Authors/Create");
+        PageObjectAuthorCreate authorCreate = PageFactory.initElements(driver, PageObjectAuthorCreate.class);
+        authorCreate.createAuthor("Jo", "Nesbo");
+    }
+
+    @Then("Zobacze dodanego autora")
+    public void seeAddedAuthor(){
+        PageObjectAuthorCreate authorCreate = PageFactory.initElements(driver, PageObjectAuthorCreate.class);
+        assertTrue(authorCreate.assertAddedRecord().contains("Jo Nesbo"));
+        authorCreate.deleteLastItem();
         driver.quit();
     }
 

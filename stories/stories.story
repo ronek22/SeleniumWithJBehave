@@ -1,4 +1,4 @@
-Scenario: Logowanie
+Scenario: Logowanie pomyslne
 
 Given Mam webdrivera
 When Zaloguje się na konto: <login> z hasłem: <password>
@@ -9,6 +9,12 @@ Examples:
 |admin@admin.com|admin1    |Hello admin@admin.com!|
 |mod@mod.com    |moderator1|Hello mod@mod.com!    |
 |user@user.com  |user12    |Hello user@user.com!  |
+
+Scenario: Logowanie nieudane
+
+Given Mam webdrivera
+When Logowanie na nieistniejace konto
+Then Zostane na stronie logowania
 
 Scenario: Bledne dodawanie autora
 
@@ -23,3 +29,7 @@ Then Zobacze informacje o blednym nazwisku
 Given Zalogowany jako admin
 When Dodaje autora z imieniem i nazwiskiem z malych liter
 Then Zobacze informacje o problemach z walidacja
+
+Given Zalogowany jako admin
+When Dodaje autora z prawidlowymi danymi
+Then Zobacze dodanego autora
