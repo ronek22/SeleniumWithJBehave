@@ -45,3 +45,7 @@ Then Wyswietla wszystkie dane
 Given Zalogowany jako uzytkownik
 When Wpisuje Mickiewicz do wyszukiwarki
 Then Otrzymam 2 wyniki
+
+Given Zalogowany jako uzytkownik
+When Wpisuje nieistniejaca fraze do wyszukiwarki
+Then Otrzymam pusta tabele

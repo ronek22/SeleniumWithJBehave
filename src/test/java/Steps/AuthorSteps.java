@@ -115,6 +115,19 @@ public class AuthorSteps extends Steps {
         driver.quit();
     }
 
+    @When("Wpisuje nieistniejaca fraze do wyszukiwarki")
+    public void NotExistDataInsertToSearchBar(){
+        PageObjectAuthor author = PageFactory.initElements(driver, PageObjectAuthor.class);
+        author.toTable();
+        author.searchAuthor("czfnslkfds");
+        sizeAfter = author.sizeOfTable();
+    }
+
+    @Then("Otrzymam pusta tabele")
+    public void EmptyTableAsSearchResult(){
+        assertEquals(0, sizeAfter);
+    }
+
 
     private void login(String login, String pass) throws Exception{
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
