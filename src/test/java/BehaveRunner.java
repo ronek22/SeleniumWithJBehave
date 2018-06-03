@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class ChromeRunner extends JUnitStories {
+public class BehaveRunner extends JUnitStories {
 
 
     @Override
