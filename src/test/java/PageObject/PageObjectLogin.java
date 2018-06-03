@@ -35,4 +35,8 @@ public class PageObjectLogin {
     public boolean assertMessage() throws Exception{
         return userNameLabel.getText().contains(loginEmail);
     }
+
+    public boolean assertMessage(String message){
+        return userNameLabel.getText().equals(message);
+    }
 }
