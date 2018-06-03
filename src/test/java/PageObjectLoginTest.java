@@ -25,7 +25,7 @@ public class PageObjectLoginTest {
         PageObjectLogin loginPage = PageFactory.initElements(driver, PageObjectLogin.class);
         loginPage.login("admin@admin.com", "admin1");
         wait.until(ExpectedConditions.urlToBe("http://bookcatalog.azurewebsites.net/"));
-        assertEquals("http://bookcatalog.azurewebsites.net/", driver.getCurrentUrl());
+        assertTrue(loginPage.assertMessage());
     }
 
     @AfterClass

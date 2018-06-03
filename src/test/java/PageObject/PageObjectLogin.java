@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class PageObjectLogin {
     public WebDriver driver;
+    private String loginEmail;
 
     @FindBy(id = "Email")
     private WebElement email;
@@ -16,6 +17,9 @@ public class PageObjectLogin {
     @FindBy(id = "LoginButton")
     private WebElement loginButton;
 
+    @FindBy(id = "UserName")
+    private WebElement userNameLabel;
+
 
     public PageObjectLogin(WebDriver driver){
         this.driver = driver;
@@ -23,14 +27,12 @@ public class PageObjectLogin {
     }
 
     public void login(String login, String pass) throws Exception{
-        email.sendKeys(login);
+        email.sendKeys(login); loginEmail = login;
         password.sendKeys(pass);
         loginButton.submit();
     }
 
-    public boolean assertTitle() throws Exception{
-        Boolean result = driver.getTitle().contains("Dashboard");
-        System.out.println(driver.getTitle());
-        return(result);
+    public boolean assertMessage() throws Exception{
+        return userNameLabel.getText().contains(loginEmail);
     }
 }
