@@ -31,7 +31,6 @@ public class PageObjectLoginTest {
 
     @Test
     public void loginFailed() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
         PageObjectLogin loginPage = PageFactory.initElements(driver, PageObjectLogin.class);
         loginPage.login("sdasdad@admin.com", "admicza");
         assertEquals("http://bookcatalog.azurewebsites.net/Account/Login", driver.getCurrentUrl());
