@@ -30,6 +30,18 @@ Given Zalogowany jako admin
 When Dodaje autora z imieniem i nazwiskiem z malych liter
 Then Zobacze informacje o problemach z walidacja
 
+Scenario: Prawidlowe dodawanie autora
+
 Given Zalogowany jako admin
 When Dodaje autora z prawidlowymi danymi
 Then Zobacze dodanego autora
+
+Scenario: Wyszukiwanie na stronie autora
+
+Given Zalogowany jako uzytkownik
+When Wpisuje pusty napis do wyszukiwarki
+Then Wyswietla wszystkie dane
+
+Given Zalogowany jako uzytkownik
+When Wpisuje Mickiewicz do wyszukiwarki
+Then Otrzymam 2 wyniki

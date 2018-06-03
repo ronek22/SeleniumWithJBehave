@@ -29,7 +29,7 @@ public class BehaveRunner extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new LoginSteps(), new AuthorSteps());
+        return new InstanceStepsFactory(configuration(), new AuthorSteps());
     }
 
     @Override

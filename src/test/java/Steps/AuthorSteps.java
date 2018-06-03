@@ -1,6 +1,6 @@
 package Steps;
 
-import PageObject.PageObjectAuthorCreate;
+import PageObject.PageObjectAuthor;
 import PageObject.PageObjectLogin;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -16,16 +16,23 @@ import static org.junit.Assert.assertTrue;
 
 public class AuthorSteps extends Steps {
     private static WebDriver driver;
+    private int sizeBefore, sizeAfter;
+
     // Scenario: Bledne dodawanie autora
     @Given("Zalogowany jako admin")
     public void loginAsAdmin() throws Exception{
         login("admin@admin.com", "admin1");
     }
 
+    @Given("Zalogowany jako uzytkownik")
+    public void loginAsUser() throws Exception{
+        login("user@user.com", "user12");
+    }
+
     @When("Dodaje autora z imieniem z malych liter")
     public void addWrongFirstNameAuthor(){
-        driver.get("http://bookcatalog.azurewebsites.net/Authors/Create");
-        PageObjectAuthorCreate authorCreate = PageFactory.initElements(driver, PageObjectAuthorCreate.class);
+        PageObjectAuthor authorCreate = PageFactory.initElements(driver, PageObjectAuthor.class);
+        authorCreate.toCreate();
         authorCreate.createAuthor("jakub", "Nowy");
     }
 
@@ -38,22 +45,22 @@ public class AuthorSteps extends Steps {
 
     @When("Dodaje autora z nazwiskiem z malych liter")
     public void addWrongLastNameAuthor(){
-        driver.get("http://bookcatalog.azurewebsites.net/Authors/Create");
-        PageObjectAuthorCreate authorCreate = PageFactory.initElements(driver, PageObjectAuthorCreate.class);
+        PageObjectAuthor authorCreate = PageFactory.initElements(driver, PageObjectAuthor.class);
+        authorCreate.toCreate();
         authorCreate.createAuthor("Jakub", "nowy");
     }
 
     @Then("Zobacze informacje o blednym nazwisku")
     public void getInfoAboutWrongLastName(){
-        PageObjectAuthorCreate authorCreate = PageFactory.initElements(driver, PageObjectAuthorCreate.class);
+        PageObjectAuthor authorCreate = PageFactory.initElements(driver, PageObjectAuthor.class);
         authorCreate.assertValidationError("Last Name must start with capital letter");
         driver.quit();
     }
 
     @When("Dodaje autora z imieniem i nazwiskiem z malych liter")
     public void addWrongFirstAndLastNameAuthor(){
-        driver.get("http://bookcatalog.azurewebsites.net/Authors/Create");
-        PageObjectAuthorCreate authorCreate = PageFactory.initElements(driver, PageObjectAuthorCreate.class);
+        PageObjectAuthor authorCreate = PageFactory.initElements(driver, PageObjectAuthor.class);
+        authorCreate.toCreate();
         authorCreate.createAuthor("jakub", "nowy");
     }
 
@@ -65,16 +72,46 @@ public class AuthorSteps extends Steps {
 
     @When("Dodaje autora z prawidlowymi danymi")
     public void addAuthorWithCorrectData(){
-        driver.get("http://bookcatalog.azurewebsites.net/Authors/Create");
-        PageObjectAuthorCreate authorCreate = PageFactory.initElements(driver, PageObjectAuthorCreate.class);
+        PageObjectAuthor authorCreate = PageFactory.initElements(driver, PageObjectAuthor.class);
+        authorCreate.toCreate();
         authorCreate.createAuthor("Jo", "Nesbo");
     }
 
     @Then("Zobacze dodanego autora")
     public void seeAddedAuthor(){
-        PageObjectAuthorCreate authorCreate = PageFactory.initElements(driver, PageObjectAuthorCreate.class);
+        PageObjectAuthor authorCreate = PageFactory.initElements(driver, PageObjectAuthor.class);
         assertTrue(authorCreate.assertAddedRecord().contains("Jo Nesbo"));
         authorCreate.deleteLastItem();
+        driver.quit();
+    }
+
+    // Scenario Wyszukiwanie
+    @When("Wpisuje pusty napis do wyszukiwarki")
+    public void searchEmptyString(){
+        PageObjectAuthor author = PageFactory.initElements(driver, PageObjectAuthor.class);
+        author.toTable();
+        sizeBefore = author.sizeOfTable();
+        author.searchAuthor("");
+        sizeAfter = author.sizeOfTable();
+    }
+
+    @Then("Wyswietla wszystkie dane")
+    public void searchChangesNothing(){
+        assertEquals(sizeBefore, sizeAfter);
+        driver.quit();
+    }
+
+    @When("Wpisuje Mickiewicz do wyszukiwarki")
+    public void searchMickiewiczString(){
+        PageObjectAuthor author = PageFactory.initElements(driver, PageObjectAuthor.class);
+        author.toTable();
+        author.searchAuthor("Mickiewicz");
+        sizeAfter = author.sizeOfTable();
+    }
+
+    @Then("Otrzymam 2 wyniki")
+    public void returnTwoResultsForMickiewicz(){
+        assertEquals(2, sizeAfter);
         driver.quit();
     }
 

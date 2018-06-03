@@ -1,22 +1,17 @@
 package Steps;
 
-import PageObject.PageObjectAuthorCreate;
 import PageObject.PageObjectLogin;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import PageObject.PageObjectNavigation;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.jbehave.core.model.ExamplesTable;
 import org.jbehave.core.steps.Steps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.server.handler.WebElementHandler;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginSteps extends Steps {

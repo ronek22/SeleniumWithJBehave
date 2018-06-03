@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class PageObjectAuthorCreate {
+import java.util.List;
+
+public class PageObjectAuthor {
     public WebDriver driver;
 
     @FindBy(name = "FirstName")
@@ -20,18 +22,42 @@ public class PageObjectAuthorCreate {
     @FindBy(className = "text-danger")
     private WebElement validationError;
 
+    @FindBy(name = "SearchString")
+    private WebElement searchBar;
+
     @FindBy(id = "AuthorId")
     private WebElement authorDeleteForm;
 
+    @FindBy(xpath = "//table[@class='table']/tbody/tr")
+    private List<WebElement> tableContent;
 
-    public PageObjectAuthorCreate(WebDriver driver){
+
+    public PageObjectAuthor(WebDriver driver){
         this.driver = driver;
+    }
+
+    public void toTable(){
+        driver.get("http://bookcatalog.azurewebsites.net/Authors");
+    }
+
+    public void toCreate(){
+        driver.get("http://bookcatalog.azurewebsites.net/Authors/Create");
+
     }
 
     public void createAuthor(String firstname, String lastname){
         firstName.sendKeys(firstname);
         lastName.sendKeys(lastname);
         createButton.submit();
+    }
+
+    public void searchAuthor(String searchPhrase){
+        searchBar.sendKeys(searchPhrase);
+        searchBar.submit();
+    }
+
+    public int sizeOfTable(){
+        return tableContent.size();
     }
 
     public Boolean assertValidationError(String message){
