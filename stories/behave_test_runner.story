@@ -52,13 +52,13 @@ Then Otrzymam pusta tabele
 
 Scenario: Dodawanie nieprawidłowych ksiazek
 
-Given Zalogowany jako admin2
+Given Zalogowany jako admin, przekierowany na strone ksiazek
 When Dodam ksiazke: <title> : <pages> : <date> : <price> : <author>
 Then Zobaczę błąd o tresci : <message>
 
 Examples:
-|title|pages|date|price|author|message|
-|Jas|200|10101995|a|1|The field Price must be a number.|
-|Jas|200|10102222|15|1|Release Date cannot be in future|
+|title|pages|date|price|author|iderror|message|
+|Jas|200|10101995|a|1|Price-error|The field Price must be a number.|
+|Jas|10000|10101999|15|1|Length-error|The field Number of pages must be between 1 and 8000.|
 
 

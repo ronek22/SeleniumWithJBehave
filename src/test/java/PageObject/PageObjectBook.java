@@ -28,9 +28,6 @@ public class PageObjectBook {
     @FindBy(id = "BookId")
     private WebElement formDelete;
 
-    @FindBy(className = "text-danger")
-    private WebElement validationError;
-
     @FindBy(name = "SearchString")
     private WebElement searchBar;
 
@@ -99,9 +96,6 @@ public class PageObjectBook {
         return tableContent;
     }
 
-    public Boolean assertValidationError(String message){
-        return validationError.getText().contains(message);
-    }
 
     public String assertAddedRecord() {
         WebElement tr = driver.findElement(By.xpath("(//table[@class='table']/tbody/tr)[last()]"));
