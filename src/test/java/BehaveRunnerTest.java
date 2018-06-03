@@ -1,4 +1,5 @@
 import Steps.AuthorSteps;
+import Steps.BookSteps;
 import Steps.LoginSteps;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -27,7 +28,7 @@ public class BehaveRunnerTest extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new LoginSteps(), new AuthorSteps());
+        return new InstanceStepsFactory(configuration(), new LoginSteps(), new AuthorSteps(), new BookSteps());
     }
 
     @Override
