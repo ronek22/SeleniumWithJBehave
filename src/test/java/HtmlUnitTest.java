@@ -35,7 +35,7 @@ public class HtmlUnitTest
     public void searchTestForJanPhrase(){
         PageObjectBook books = PageFactory.initElements(driver, PageObjectBook.class);
         books.searchBooks("Jan");
-        assertEquals(2, books.sizeOfTable());
+        assertEquals(3, books.sizeOfTable());
     }
 
     @Test
